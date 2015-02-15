@@ -44,7 +44,7 @@ unsigned long Blink::loop(WakeReason reason)
 {
   // Update the LED
   digitalWrite(pin, state);
-  
+
   // Update the state
   state = LOW == state ? HIGH : LOW;
 
@@ -52,10 +52,45 @@ unsigned long Blink::loop(WakeReason reason)
   return delay;
 }
 
-Blink blink1 = Blink(10, 125);
-Blink blink2 = Blink(11, 250);
-Blink blink3 = Blink(12, 500);
-Blink blink4 = Blink(13, 1000);
+class RandomBlink : public Task
+{
+  private:
+    int state;
+    int pin;
+
+  public:
+    RandomBlink(int pin)
+    {
+      this->state = LOW;
+      this->pin = pin;
+    }
+    void setup();
+    unsigned long loop(WakeReason reason);
+};
+
+void RandomBlink::setup()
+{
+  // initialize the digital pin as an output.
+  pinMode(pin, OUTPUT);
+}
+
+unsigned long RandomBlink::loop(WakeReason reason)
+{
+  // Update the LED
+  digitalWrite(pin, state);
+  
+  // Update the state
+  state = LOW == state ? HIGH : LOW;
+
+  // return when we next want to be called
+  return random(1000);
+}
+
+Blink blink1 = Blink(9, 125);
+Blink blink2 = Blink(10, 250);
+Blink blink3 = Blink(11, 500);
+Blink blink4 = Blink(12, 1000);
+RandomBlink randomBlink = RandomBlink(13);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -63,6 +98,7 @@ void setup() {
   MicroTasks.startTask(&blink2);
   MicroTasks.startTask(&blink3);
   MicroTasks.startTask(&blink4);
+  MicroTasks.startTask(&randomBlink);
 }
 
 // the loop function runs over and over again forever
