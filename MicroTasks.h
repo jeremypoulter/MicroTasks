@@ -10,12 +10,13 @@
 #endif
 
 #include "Task.h"
+#include "List.h"
 
 class MicroTasksClass
 {
   private:
-    Task *oFirstTask;
-    Task *oLastTask;
+
+    List oTasks;
 
   protected:
 
@@ -27,6 +28,12 @@ class MicroTasksClass
 
     void startTask(Task *oTask);
     void stopTask(Task *oTask);
+
+    static unsigned long WaitForEvent;
+    static unsigned long WaitForMessage;
+    static unsigned long WaitForMask;
+
+    static unsigned long Infinate;
 };
 
 extern MicroTasksClass MicroTasks;

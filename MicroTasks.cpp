@@ -5,67 +5,53 @@
 #include "Task.h"
 #include "MicroTasks.h"
 
+unsigned long MicroTasksClass::WaitForEvent = (1 << 31);
+unsigned long MicroTasksClass::WaitForMessage = (1 << 30);
+
+unsigned long MicroTasksClass::WaitForMask = MicroTasksClass::WaitForEvent | WaitForMessage;
+
+unsigned long MicroTasksClass::Infinate = ~MicroTasksClass::WaitForMask;
+
 MicroTasksClass::MicroTasksClass()
 {
-  oFirstTask = NULL;
-  oLastTask = NULL;
 }
 
 void MicroTasksClass::init()
 {
-
-
 }
 
 void MicroTasksClass::update()
 {
   Task *oNext;
 
-  for (Task *oTask = oFirstTask; oTask; oTask = oNext)
+  for (Task *oTask = (Task *)oTasks.GetFirst(); oTask; oTask = oNext)
   {
     // Keep a pointer to the next task in case this on is stopped
-    oNext = oTask->oNext;
+    oNext = (Task *)oTask->GetNext();
 
     if (oTask->ulNextLoop <= millis())
     {
       unsigned long ulDelay = oTask->loop(WakeReason_Scheduled);
-      oTask->ulNextLoop += ulDelay;
+
+      oTask->uiFlags = ulDelay & MicroTasks.WaitForMask;
+      if (MicroTasks.Infinate == (ulDelay & ~MicroTasks.WaitForMask)) {
+        oTask->ulNextLoop = 0xFFFFFFFF;
+      } else {
+        oTask->ulNextLoop += (ulDelay & ~MicroTasks.WaitForMask);
+      }
     }
   }
 }
 
 void MicroTasksClass::startTask(Task *oTask)
 {
-  if (oLastTask) {
-    oLastTask->oNext = oTask;
-  }
-  oTask->oPrev = oLastTask;
-  oLastTask = oTask;
-  if (NULL == oFirstTask)
-  {
-    oFirstTask = oTask;
-  }
-
+  oTasks.Add(oTask);
   oTask->setup();
 }
 
 void MicroTasksClass::stopTask(Task *oTask)
 {
-  if (oTask->oPrev)
-  {
-    oTask->oPrev->oNext = oTask->oNext;
-  }
-  if (oTask->oNext)
-  {
-    oTask->oNext->oPrev = oTask->oPrev;
-  }
-  if (oFirstTask == oTask) {
-    oFirstTask = oTask->oNext;
-  }
-  if (oLastTask == oTask)
-  {
-    oLastTask = oTask->oPrev;
-  }
+  oTasks.Remove(oTask);
 }
 
 MicroTasksClass MicroTasks;
