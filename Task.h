@@ -9,8 +9,7 @@
   #include "WProgram.h"
 #endif
 
-class Task;
-#include "MicroTasks.h"
+#include "Node.h"
 
 enum WakeReason
 {
@@ -21,14 +20,13 @@ enum WakeReason
 
 class MicroTasks;
 
-class Task
+class Task : Node
 {
   friend class MicroTasksClass;
 
   private:
-    Task *oPrev;
-    Task *oNext;
     unsigned long ulNextLoop;
+    unsigned long uiFlags;
 
   protected:
 
@@ -41,4 +39,3 @@ class Task
 };
 
 #endif
-
