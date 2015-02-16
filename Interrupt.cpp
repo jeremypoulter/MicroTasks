@@ -9,6 +9,10 @@ Interrupt *interrupts[] = {
   NULL
 };
 
+uint8_t pins[] = {
+  2, 3
+};
+
 InterruptCallback Interrupt::Triggers[] = {
   Interrupt::TriggerInt0,
   Interrupt::TriggerInt1
@@ -18,6 +22,7 @@ bool Interrupt::Attach()
 {
   if (NULL == interrupts[interrupt])
   {
+    pinMode(pins[interrupt], INPUT);
     attachInterrupt(interrupt, Triggers[interrupt], mode);
     interrupts[interrupt] = this;
     return true;

@@ -21,15 +21,15 @@ class Event : public Node
     List oClients;
     static List oEvents;
 
-    volatile int trigger;
+    volatile int triggered;
 
   protected:
     void Trigger() {
-      trigger = 1;
+      triggered = 1;
     }
 
   public:
-    Event() : oClients() {
+    Event() : oClients(), triggered(0) {
       oEvents.Add(this);
     }
     ~Event() {
@@ -38,6 +38,9 @@ class Event : public Node
 
     void Register(EventListener *oListener);
     void Deregister(EventListener *oListener);
+    bool IsTriggered() {
+      return triggered ? true : false;
+    }
 };
 
 #endif

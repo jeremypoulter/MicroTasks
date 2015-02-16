@@ -44,11 +44,16 @@ void Blink::setup()
 
 unsigned long Blink::loop(WakeReason reason)
 {
+  Serial.println("Blink::loop");
+  Serial.println((unsigned long)this);
+
   // Update the LED
+  Serial.println(state);
   digitalWrite(pin, state);
   
   // Update the state
   state = LOW == state ? HIGH : LOW;
+  Serial.println(state);
 
   // return when we next want to be called
   return delay;
@@ -58,19 +63,18 @@ Blink blink1 = Blink(10, 125);
 Blink blink2 = Blink(11, 250);
 Blink blink3 = Blink(12, 500);
 
-Interrupt buttonEvent(0, FALLING);
+Interrupt buttonEvent(0, RISING);
 
 class BlinkOnButton : public Task
 {
   private:
     int state;
     int pin;
-    int delay;
     EventListener buttonEventListener;
 
   public:
-    BlinkOnButton(int pin, int delay = 1000) : 
-      state(LOW), pin(pin), delay(delay), buttonEventListener(this)
+    BlinkOnButton(int pin) : 
+      state(LOW), pin(pin), buttonEventListener(this)
     {
     }
 
@@ -87,21 +91,38 @@ void BlinkOnButton::setup()
 
 unsigned long BlinkOnButton::loop(WakeReason reason)
 {
-  // Update the LED
-  digitalWrite(pin, digitalRead(2));
+  Serial.println("BlinkOnButton::loop");
+  Serial.println((unsigned long)this);
+
+  /* if (WakeReason_Event == reason &&  buttonEvent.IsTriggered()) */
+  {
+    // Update the LED
+    Serial.println(state);
+    digitalWrite(pin, state);
+
+    // Update the state
+    state = LOW == state ? HIGH : LOW;
+    Serial.println(state);
+  }
 
   // return when we next want to be called
   return MicroTasks.Infinate | MicroTasks.WaitForEvent;
 }
 
-BlinkOnButton blinkOnButton = BlinkOnButton(13, 1000);
+BlinkOnButton blinkOnButton1 = BlinkOnButton(13);
+BlinkOnButton blinkOnButton2 = BlinkOnButton(9);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  MicroTasks.startTask(&blink1);
-  MicroTasks.startTask(&blink2);
+//  MicroTasks.startTask(&blink1);
+//  MicroTasks.startTask(&blink2);
   MicroTasks.startTask(&blink3);
-  MicroTasks.startTask(&blinkOnButton);
+  MicroTasks.startTask(&blinkOnButton1);
+  MicroTasks.startTask(&blinkOnButton2);
+
+  buttonEvent.Attach();
+
+  Serial.begin(115200);
 }
 
 // the loop function runs over and over again forever

@@ -15,10 +15,10 @@
 class MicroTasksClass
 {
   private:
-
     List oTasks;
 
   protected:
+    void WakeTask(Task *oTask, WakeReason eReason);
 
   public:
     MicroTasksClass();
