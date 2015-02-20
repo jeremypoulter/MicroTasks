@@ -24,6 +24,7 @@ void MicroTasksClass::init()
 void MicroTasksClass::update()
 {
   Event *oNextEvent;
+  EventListener *oNextEventListener;
   Task *oNextTask;
 
   // Any events triggered?
@@ -33,12 +34,11 @@ void MicroTasksClass::update()
 
     if (oEvent->triggered)
     {
-      for (Task *oTask = (Task *)oEvent->oClients.GetFirst(); oTask; oTask = oNextTask)
+      for (EventListener *oEventListener = (EventListener *)(oEvent->oClients.GetFirst()); oEventListener; oEventListener = oNextEventListener)
       {
         // Keep a pointer to the next task in case this on is stopped
-        oNextTask = (Task *)oTask->GetNext();
-
-        WakeTask(oTask, WakeReason_Event);
+        oNextEventListener = (EventListener *)(oEventListener->GetNext());
+        WakeTask(oEventListener->GetTask(), WakeReason_Event);
       }
 
       oEvent->triggered = 0;
@@ -57,8 +57,14 @@ void MicroTasksClass::update()
   }
 }
 
-void MicroTasksClass::WakeTask(Task * oTask, WakeReason eReason)
+void MicroTasksClass::WakeTask(Task *oTask, WakeReason eReason)
 {
+//   Serial.print("W ");
+//   Serial.print((unsigned int)oTask);
+//   Serial.print(" [");
+//   Serial.print((int)eReason);
+//   Serial.println("]");
+
   unsigned long ulDelay = oTask->loop(eReason);
 
   oTask->uiFlags = ulDelay & MicroTasks.WaitForMask;

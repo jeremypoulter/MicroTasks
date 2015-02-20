@@ -26,15 +26,15 @@ class Blink : public Task
     int delay;
 
   public:
-    Blink(int pin, int delay = 1000) 
-    {
-      this->state = LOW;
-      this->pin = pin;
-      this->delay = delay;
-    }
+    Blink(int pin, int delay = 1000);
     void setup();
     unsigned long loop(WakeReason reason);
 };
+
+Blink::Blink(int pin, int delay) : 
+  state(LOW), pin(pin), delay(delay), Task()
+{
+}
 
 void Blink::setup()
 {
@@ -44,16 +44,11 @@ void Blink::setup()
 
 unsigned long Blink::loop(WakeReason reason)
 {
-  Serial.println("Blink::loop");
-  Serial.println((unsigned long)this);
-
   // Update the LED
-  Serial.println(state);
   digitalWrite(pin, state);
   
   // Update the state
   state = LOW == state ? HIGH : LOW;
-  Serial.println(state);
 
   // return when we next want to be called
   return delay;
@@ -63,7 +58,7 @@ Blink blink1 = Blink(10, 125);
 Blink blink2 = Blink(11, 250);
 Blink blink3 = Blink(12, 500);
 
-Interrupt buttonEvent(0, RISING);
+Interrupt buttonEvent(0, FALLING);
 
 class BlinkOnButton : public Task
 {
@@ -73,14 +68,16 @@ class BlinkOnButton : public Task
     EventListener buttonEventListener;
 
   public:
-    BlinkOnButton(int pin) : 
-      state(LOW), pin(pin), buttonEventListener(this)
-    {
-    }
+    BlinkOnButton(int pin);
 
     void setup();
     unsigned long loop(WakeReason reason);
 };
+
+BlinkOnButton::BlinkOnButton(int pin) :
+  state(LOW), pin(pin), buttonEventListener(this), Task()
+{
+}
 
 void BlinkOnButton::setup()
 {
@@ -91,18 +88,13 @@ void BlinkOnButton::setup()
 
 unsigned long BlinkOnButton::loop(WakeReason reason)
 {
-  Serial.println("BlinkOnButton::loop");
-  Serial.println((unsigned long)this);
-
-  /* if (WakeReason_Event == reason &&  buttonEvent.IsTriggered()) */
+  if (WakeReason_Event == reason &&  buttonEvent.IsTriggered())
   {
     // Update the LED
-    Serial.println(state);
     digitalWrite(pin, state);
 
     // Update the state
     state = LOW == state ? HIGH : LOW;
-    Serial.println(state);
   }
 
   // return when we next want to be called
@@ -114,15 +106,13 @@ BlinkOnButton blinkOnButton2 = BlinkOnButton(9);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-//  MicroTasks.startTask(&blink1);
-//  MicroTasks.startTask(&blink2);
+  MicroTasks.startTask(&blink1);
+  MicroTasks.startTask(&blink2);
   MicroTasks.startTask(&blink3);
   MicroTasks.startTask(&blinkOnButton1);
   MicroTasks.startTask(&blinkOnButton2);
 
   buttonEvent.Attach();
-
-  Serial.begin(115200);
 }
 
 // the loop function runs over and over again forever

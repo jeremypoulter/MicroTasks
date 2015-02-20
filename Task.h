@@ -11,12 +11,19 @@
 
 #include "Node.h"
 
+typedef int WakeReason;
+
+#define WakeReason_Scheduled  0
+#define WakeReason_Event      1
+#define WakeReason_Message    2
+/*
 enum WakeReason
 {
-  WakeReason_Scheduled,
-  WakeReason_Event,
-  WakeReason_Message
+  WakeReason_Scheduled = 0,
+  WakeReason_Event = 1,
+  WakeReason_Message = 2
 };
+*/
 
 class MicroTasks;
 

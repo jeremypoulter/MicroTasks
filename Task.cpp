@@ -4,9 +4,9 @@
 
 #include "Task.h"
 
-Task::Task()
+Task::Task() : 
+  ulNextLoop(millis()), uiFlags(0), Node()
 {
-  ulNextLoop = millis();
 }
 
 Task::~Task()

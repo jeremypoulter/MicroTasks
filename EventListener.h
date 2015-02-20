@@ -17,7 +17,8 @@ class EventListener : public Node
   private:
     Task *oTask;
   public:
-    EventListener(Task *oTask) : oTask(oTask) {
+    EventListener(Task *oTask) : 
+      oTask(oTask), Node() {
     }
 
     Task *GetTask() {

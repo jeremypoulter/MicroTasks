@@ -24,7 +24,7 @@ class Event : public Node
     volatile int triggered;
 
   protected:
-    void Trigger() {
+    virtual void Trigger() {
       triggered = 1;
     }
 

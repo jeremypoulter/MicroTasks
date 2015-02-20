@@ -5,6 +5,7 @@ Node::Node()
 {
   oNext = NULL;
   oPrev = NULL;
+  oList = NULL;
 }
 
 
