@@ -79,6 +79,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ButtonEvent.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="Interrupt.h" />
@@ -93,6 +94,7 @@
     <ClInclude Include="Visual Micro\.MicroTasks.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonEvent.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="Interrupt.cpp" />
