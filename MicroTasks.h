@@ -12,6 +12,13 @@
 #include "Task.h"
 #include "List.h"
 
+/**
+ * Gives the number of items in a static array
+ *
+ * @param a the array to return the number of items in
+ */
+#define ARRAY_ITEMS(a) (sizeof(a) / sizeof(a[0]))
+
 class MicroTasksClass
 {
   private:
