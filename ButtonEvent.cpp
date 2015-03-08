@@ -10,6 +10,6 @@ void ButtonEvent::Trigger()
   if (timeNow >= lastTime + debounce)
   {
     Interrupt::Trigger();
-    lastTime = timeNow;
   }
+  lastTime = timeNow;
 }
