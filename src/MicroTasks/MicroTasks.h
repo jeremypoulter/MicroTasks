@@ -36,14 +36,13 @@ class MicroTasksClass
     void startTask(Task *oTask);
     void stopTask(Task *oTask);
 
-    static unsigned long WaitForEvent;
-    static unsigned long WaitForMessage;
-    static unsigned long WaitForMask;
+    static uint32_t WaitForEvent;
+    static uint32_t WaitForMessage;
+    static uint32_t WaitForMask;
 
-    static unsigned long Infinate;
+    static uint32_t Infinate;
 };
 
 extern MicroTasksClass MicroTasks;
 
 #endif
-

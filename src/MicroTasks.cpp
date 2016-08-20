@@ -1,17 +1,17 @@
-// 
-// 
-// 
+//
+//
+//
 
-#include "Task.h"
-#include "Event.h"
-#include "MicroTasks.h"
+#include "MicroTasks/Task.h"
+#include "MicroTasks/Event.h"
+#include "MicroTasks/MicroTasks.h"
 
-unsigned long MicroTasksClass::WaitForEvent = (1 << 31);
-unsigned long MicroTasksClass::WaitForMessage = (1 << 30);
+uint32_t MicroTasksClass::WaitForEvent = (1 << 31);
+uint32_t MicroTasksClass::WaitForMessage = (1 << 30);
 
-unsigned long MicroTasksClass::WaitForMask = MicroTasksClass::WaitForEvent | WaitForMessage;
+uint32_t MicroTasksClass::WaitForMask = MicroTasksClass::WaitForEvent | WaitForMessage;
 
-unsigned long MicroTasksClass::Infinate = ~MicroTasksClass::WaitForMask;
+uint32_t MicroTasksClass::Infinate = ~MicroTasksClass::WaitForMask;
 
 MicroTasksClass::MicroTasksClass()
 {
@@ -87,4 +87,3 @@ void MicroTasksClass::stopTask(Task *oTask)
 }
 
 MicroTasksClass MicroTasks;
-

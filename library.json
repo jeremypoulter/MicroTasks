@@ -1,0 +1,19 @@
+{
+  "name":"MicroTasks",
+  "version":"0.0.1",
+  "description":"Provide a basic co-operative task management allowing some simple level of multi tasking.",
+  "keywords":"task,thread,multitask",
+  "framework":"arduino",
+  "authors":[
+    {
+      "name":"Jeremy Poulter",
+      "email":"jeremy@bigjungle.net",
+      "maintainer":true
+    }
+  ],
+  "repository":
+  {
+      "type": "git",
+      "url": "https://github.com/jeremypoulter/MicroTasks.git"
+  }
+}
