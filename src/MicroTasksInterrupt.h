@@ -9,12 +9,14 @@
   #include "WProgram.h"
 #endif
 
-#include "Event.h"
+#include "MicroTasksEvent.h"
 
-typedef void(*InterruptCallback)(void);
-
-class Interrupt : public Event
+namespace MicroTasks
 {
+  typedef void(*InterruptCallback)(void);
+
+  class Interrupt : public Event
+  {
   private:
     uint8_t interrupt;
     int mode;
@@ -32,7 +34,8 @@ class Interrupt : public Event
 
     bool Attach();
     void Dettach();
-};
+  };
+}
 
 #endif
 

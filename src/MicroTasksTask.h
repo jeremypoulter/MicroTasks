@@ -9,27 +9,30 @@
   #include "WProgram.h"
 #endif
 
-#include "Node.h"
-
-typedef int WakeReason;
+#include "MicroTasksNode.h"
 
 #define WakeReason_Scheduled  0
 #define WakeReason_Event      1
 #define WakeReason_Message    2
-/*
-enum WakeReason
-{
-  WakeReason_Scheduled = 0,
-  WakeReason_Event = 1,
-  WakeReason_Message = 2
-};
-*/
 
-class MicroTasks;
-
-class Task : Node
+namespace MicroTasks
 {
-  friend class MicroTasksClass;
+  typedef int WakeReason;
+
+  /*
+  enum WakeReason
+  {
+    WakeReason_Scheduled = 0,
+    WakeReason_Event = 1,
+    WakeReason_Message = 2
+  };
+  */
+
+  class MicroTasks;
+
+  class Task : Node
+  {
+    friend class MicroTasksClass;
 
   private:
     unsigned long ulNextLoop;
@@ -43,6 +46,7 @@ class Task : Node
 
     virtual void setup() = 0;
     virtual unsigned long loop(WakeReason reason) = 0;
-};
+  };
+}
 
 #endif

@@ -9,13 +9,15 @@
   #include "WProgram.h"
 #endif
 
-#include "Node.h"
-#include "List.h"
-#include "EventListener.h"
+#include "MicroTasksNode.h"
+#include "MicroTasksList.h"
+#include "MicroTasksEventListener.h"
 
-class Event : public Node
+namespace MicroTasks
 {
-  friend class MicroTasksClass;
+  class Event : public Node
+  {
+    friend class MicroTasksClass;
 
   private:
     List oClients;
@@ -41,7 +43,8 @@ class Event : public Node
     bool IsTriggered() {
       return triggered ? true : false;
     }
-};
+  };
+}
 
 #endif
 

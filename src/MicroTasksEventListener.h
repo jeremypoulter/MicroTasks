@@ -9,22 +9,24 @@
   #include "WProgram.h"
 #endif
 
-#include "Node.h"
-#include "Task.h"
+#include "MicroTasksNode.h"
+#include "MicroTasksTask.h"
 
-class EventListener : public Node
+namespace MicroTasks
 {
+  class EventListener : public Node
+  {
   private:
     Task *oTask;
   public:
-    EventListener(Task *oTask) : 
+    EventListener(Task *oTask) :
       oTask(oTask), Node() {
     }
 
     Task *GetTask() {
       return oTask;
     }
-};
+  };
+}
 
 #endif
-

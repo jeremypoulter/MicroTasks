@@ -9,10 +9,12 @@
   #include "WProgram.h"
 #endif
 
-#include "Node.h"
+#include "MicroTasksNode.h"
 
-class List
+namespace MicroTasks
 {
+  class List
+  {
   private:
     Node *oFirst;
     Node *oLast;
@@ -29,7 +31,8 @@ class List
     Node *GetLast() {
       return oLast;
     }
-};
+  };
+}
 
 #endif
 

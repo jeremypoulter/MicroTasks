@@ -2,16 +2,16 @@
 //
 //
 
-#include "MicroTasks/Task.h"
-#include "MicroTasks/Event.h"
-#include "MicroTasks/MicroTasks.h"
+#include "MicroTasksTask.h"
+#include "MicroTasksEvent.h"
+#include "MicroTasks.h"
 
-uint32_t MicroTasksClass::WaitForEvent = (1 << 31);
-uint32_t MicroTasksClass::WaitForMessage = (1 << 30);
+uint32_t MicroTasks::MicroTasksClass::WaitForEvent = (1 << 31);
+uint32_t MicroTasks::MicroTasksClass::WaitForMessage = (1 << 30);
 
-uint32_t MicroTasksClass::WaitForMask = MicroTasksClass::WaitForEvent | WaitForMessage;
+uint32_t MicroTasks::MicroTasksClass::WaitForMask = MicroTasksClass::WaitForEvent | WaitForMessage;
 
-uint32_t MicroTasksClass::Infinate = ~MicroTasksClass::WaitForMask;
+uint32_t MicroTasks::MicroTasksClass::Infinate = ~MicroTasksClass::WaitForMask;
 
 MicroTasksClass::MicroTasksClass()
 {

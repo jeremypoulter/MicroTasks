@@ -9,12 +9,14 @@
 #include "WProgram.h"
 #endif
 
-class Node;
-class List;
-
-class Node
+namespace MicroTasks
 {
-  friend List;
+  class Node;
+  class List;
+
+  class Node
+  {
+    friend List;
 
   private:
     Node *oPrev;
@@ -33,6 +35,7 @@ class Node
     Node *GetPrev() {
       return oPrev;
     }
-};
+  };
+}
 
 #endif
