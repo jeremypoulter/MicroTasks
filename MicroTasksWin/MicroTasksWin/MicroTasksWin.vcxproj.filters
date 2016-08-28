@@ -30,32 +30,32 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Event.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\EventListener.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Interrupt.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\List.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\MicroTasks.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Node.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Task.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="VSPDE.h">
       <Filter>Source Files\Stub</Filter>
     </ClInclude>
     <ClInclude Include="WProgram.h">
       <Filter>Source Files\Stub</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MicroTasks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MicroTasksEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MicroTasksEventListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MicroTasksInterrupt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MicroTasksList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MicroTasksNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MicroTasksTask.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,25 +68,25 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files\Stub</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Event.cpp">
+    <ClCompile Include="..\..\src\MicroTasks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\EventListener.cpp">
+    <ClCompile Include="..\..\src\MicroTasksEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Interrupt.cpp">
+    <ClCompile Include="..\..\src\MicroTasksEventListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\List.cpp">
+    <ClCompile Include="..\..\src\MicroTasksInterrupt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\MicroTasks.cpp">
+    <ClCompile Include="..\..\src\MicroTasksList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Node.cpp">
+    <ClCompile Include="..\..\src\MicroTasksNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Task.cpp">
+    <ClCompile Include="..\..\src\MicroTasksTask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

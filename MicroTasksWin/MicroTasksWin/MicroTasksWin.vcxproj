@@ -81,26 +81,26 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\MicroTasks\Event.h" />
-    <ClInclude Include="..\..\src\MicroTasks\EventListener.h" />
-    <ClInclude Include="..\..\src\MicroTasks\Interrupt.h" />
-    <ClInclude Include="..\..\src\MicroTasks\List.h" />
-    <ClInclude Include="..\..\src\MicroTasks\MicroTasks.h" />
-    <ClInclude Include="..\..\src\MicroTasks\Node.h" />
-    <ClInclude Include="..\..\src\MicroTasks\Task.h" />
+    <ClInclude Include="..\..\src\MicroTasksEvent.h" />
+    <ClInclude Include="..\..\src\MicroTasksEventListener.h" />
+    <ClInclude Include="..\..\src\MicroTasksInterrupt.h" />
+    <ClInclude Include="..\..\src\MicroTasksList.h" />
+    <ClInclude Include="..\..\src\MicroTasks.h" />
+    <ClInclude Include="..\..\src\MicroTasksNode.h" />
+    <ClInclude Include="..\..\src\MicroTasksTask.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="VSPDE.h" />
     <ClInclude Include="WProgram.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\Event.cpp" />
-    <ClCompile Include="..\..\src\EventListener.cpp" />
-    <ClCompile Include="..\..\src\Interrupt.cpp" />
-    <ClCompile Include="..\..\src\List.cpp" />
+    <ClCompile Include="..\..\src\MicroTasksEvent.cpp" />
+    <ClCompile Include="..\..\src\MicroTasksEventListener.cpp" />
+    <ClCompile Include="..\..\src\MicroTasksInterrupt.cpp" />
+    <ClCompile Include="..\..\src\MicroTasksList.cpp" />
     <ClCompile Include="..\..\src\MicroTasks.cpp" />
-    <ClCompile Include="..\..\src\Node.cpp" />
-    <ClCompile Include="..\..\src\Task.cpp" />
+    <ClCompile Include="..\..\src\MicroTasksNode.cpp" />
+    <ClCompile Include="..\..\src\MicroTasksTask.cpp" />
     <ClCompile Include="MicroTasksWin.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="VSPDE.cpp" />
