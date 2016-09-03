@@ -57,6 +57,9 @@
     <ClInclude Include="..\..\src\MicroTasksTask.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\MicroTasksButtonEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MicroTasksWin.cpp">
@@ -87,6 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MicroTasksTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MicroTasksButtonEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

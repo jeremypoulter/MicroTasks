@@ -9,7 +9,7 @@
   #include "WProgram.h"
 #endif
 
-#include "Interrupt.h"
+#include "MicroTasksInterrupt.h"
 
 namespace MicroTasks
 {

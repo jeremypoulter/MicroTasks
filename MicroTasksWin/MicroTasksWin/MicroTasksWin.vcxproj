@@ -81,6 +81,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\MicroTasksButtonEvent.h" />
     <ClInclude Include="..\..\src\MicroTasksEvent.h" />
     <ClInclude Include="..\..\src\MicroTasksEventListener.h" />
     <ClInclude Include="..\..\src\MicroTasksInterrupt.h" />
@@ -94,6 +95,7 @@
     <ClInclude Include="WProgram.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\MicroTasksButtonEvent.cpp" />
     <ClCompile Include="..\..\src\MicroTasksEvent.cpp" />
     <ClCompile Include="..\..\src\MicroTasksEventListener.cpp" />
     <ClCompile Include="..\..\src\MicroTasksInterrupt.cpp" />
