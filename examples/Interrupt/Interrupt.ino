@@ -13,10 +13,12 @@
   by Scott Fitzgerald
  */
 
-#include "MicroTasks\MicroTasks.h"
-#include "MicroTasks\Task.h"
-#include "MicroTasks\Interrupt.h"
-#include "MicroTasks\EventListener.h"
+#include "MicroTasks.h"
+#include "MicroTasksTask.h"
+#include "MicroTasksInterrupt.h"
+#include "MicroTasksEventListener.h"
+
+using namespace MicroTasks;
 
 class Blink : public Task
 {
@@ -98,7 +100,7 @@ unsigned long BlinkOnButton::loop(WakeReason reason)
   }
 
   // return when we next want to be called
-  return MicroTasks.Infinate | MicroTasks.WaitForEvent;
+  return MicroTask.Infinate | MicroTask.WaitForEvent;
 }
 
 BlinkOnButton blinkOnButton1 = BlinkOnButton(13);
@@ -106,16 +108,16 @@ BlinkOnButton blinkOnButton2 = BlinkOnButton(9);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  MicroTasks.startTask(&blink1);
-  MicroTasks.startTask(&blink2);
-  MicroTasks.startTask(&blink3);
-  MicroTasks.startTask(&blinkOnButton1);
-  MicroTasks.startTask(&blinkOnButton2);
+  MicroTask.startTask(&blink1);
+  MicroTask.startTask(&blink2);
+  MicroTask.startTask(&blink3);
+  MicroTask.startTask(&blinkOnButton1);
+  MicroTask.startTask(&blinkOnButton2);
 
   buttonEvent.Attach();
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  MicroTasks.update();
+  MicroTask.update();
 }

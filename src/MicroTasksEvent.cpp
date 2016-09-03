@@ -2,7 +2,9 @@
 //
 //
 
-#include "MicroTasks_Event.h"
+#include "MicroTasksEvent.h"
+
+using namespace MicroTasks;
 
 List Event::oEvents = List();
 

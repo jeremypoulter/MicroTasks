@@ -2,7 +2,9 @@
 //
 //
 
-#include "MicroTasks_Interrupt.h"
+#include "MicroTasksInterrupt.h"
+
+using namespace MicroTasks;
 
 Interrupt *interrupts[] = {
   NULL,

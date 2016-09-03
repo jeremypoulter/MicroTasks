@@ -3,8 +3,8 @@
 
 #include "stdafx.h"
 
-#include "../../examples/Blink/Blink.ino"
-//#include "../../examples/Interrupt/Interrupt.ino"
+//#include "../../examples/Blink/Blink.ino"
+#include "../../examples/Interrupt/Interrupt.ino"
 
 int main(int, char**);
 

@@ -6,12 +6,14 @@
 #include "MicroTasksEvent.h"
 #include "MicroTasks.h"
 
-uint32_t MicroTasks::MicroTasksClass::WaitForEvent = (1 << 31);
-uint32_t MicroTasks::MicroTasksClass::WaitForMessage = (1 << 30);
+using namespace MicroTasks;
 
-uint32_t MicroTasks::MicroTasksClass::WaitForMask = MicroTasksClass::WaitForEvent | WaitForMessage;
+uint32_t MicroTasksClass::WaitForEvent = (1 << 31);
+uint32_t MicroTasksClass::WaitForMessage = (1 << 30);
 
-uint32_t MicroTasks::MicroTasksClass::Infinate = ~MicroTasksClass::WaitForMask;
+uint32_t MicroTasksClass::WaitForMask = MicroTasksClass::WaitForEvent | WaitForMessage;
+
+uint32_t MicroTasksClass::Infinate = ~MicroTasksClass::WaitForMask;
 
 MicroTasksClass::MicroTasksClass()
 {
@@ -67,11 +69,11 @@ void MicroTasksClass::WakeTask(Task *oTask, WakeReason eReason)
 
   unsigned long ulDelay = oTask->loop(eReason);
 
-  oTask->uiFlags = ulDelay & MicroTasks.WaitForMask;
-  if (MicroTasks.Infinate == (ulDelay & ~MicroTasks.WaitForMask)) {
+  oTask->uiFlags = ulDelay & MicroTask.WaitForMask;
+  if (MicroTask.Infinate == (ulDelay & ~MicroTask.WaitForMask)) {
     oTask->ulNextLoop = 0xFFFFFFFF;
   } else {
-    oTask->ulNextLoop += (ulDelay & ~MicroTasks.WaitForMask);
+    oTask->ulNextLoop += (ulDelay & ~MicroTask.WaitForMask);
   }
 }
 
@@ -86,4 +88,4 @@ void MicroTasksClass::stopTask(Task *oTask)
   oTasks.Remove(oTask);
 }
 
-MicroTasksClass MicroTasks;
+MicroTasksClass MicroTask;

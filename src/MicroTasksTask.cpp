@@ -4,12 +4,14 @@
 
 #include "MicroTasksTask.h"
 
-MicroTasks::Task::Task() :
+using namespace MicroTasks;
+
+Task::Task() :
   ulNextLoop(millis()), uiFlags(0), Node()
 {
 }
 
-MicroTasks::Task::~Task()
+Task::~Task()
 {
 
 }

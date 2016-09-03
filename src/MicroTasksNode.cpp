@@ -1,5 +1,7 @@
-#include "MicroTasks_Node.h"
-#include "MicroTasks_List.h"
+#include "MicroTasksNode.h"
+#include "MicroTasksList.h"
+
+using namespace MicroTasks;
 
 Node::Node()
 {

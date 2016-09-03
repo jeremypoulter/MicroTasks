@@ -13,8 +13,10 @@
   by Scott Fitzgerald
  */
 
-#include "MicroTasks\MicroTasks.h"
-#include "MicroTasks\Task.h"
+#include "MicroTasks.h"
+#include "MicroTasksTask.h"
+
+using namespace MicroTasks;
 
 class Blink : public Task
 {
@@ -94,14 +96,14 @@ RandomBlink randomBlink = RandomBlink(13);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  MicroTasks.startTask(&blink1);
-  MicroTasks.startTask(&blink2);
-  MicroTasks.startTask(&blink3);
-  MicroTasks.startTask(&blink4);
-  MicroTasks.startTask(&randomBlink);
+  MicroTask.startTask(&blink1);
+  MicroTask.startTask(&blink2);
+  MicroTask.startTask(&blink3);
+  MicroTask.startTask(&blink4);
+  MicroTask.startTask(&randomBlink);
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  MicroTasks.update();
+  MicroTask.update();
 }

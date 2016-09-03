@@ -2,4 +2,6 @@
 //
 //
 
-#include "MicroTasks_EventListener.h"
+#include "MicroTasksEventListener.h"
+
+using namespace MicroTasks;

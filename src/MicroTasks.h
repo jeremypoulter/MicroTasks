@@ -46,6 +46,6 @@ namespace MicroTasks
   };
 }
 
-extern MicroTasks::MicroTasksClass MicroTasks;
+extern MicroTasks::MicroTasksClass MicroTask;
 
 #endif
