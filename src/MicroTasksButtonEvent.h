@@ -11,8 +11,10 @@
 
 #include "Interrupt.h"
 
-class ButtonEvent : public Interrupt
+namespace MicroTasks
 {
+  class ButtonEvent : public Interrupt
+  {
   private:
     int debounce;
     unsigned long lastTime;
@@ -21,11 +23,12 @@ class ButtonEvent : public Interrupt
     virtual void Trigger();
 
   public:
-    ButtonEvent(uint8_t interrupt, int mode, int debounce = 20) : 
+    ButtonEvent(uint8_t interrupt, int mode, int debounce = 20) :
       debounce(debounce), lastTime(0), Interrupt(interrupt, mode)
     {
     }
-};
+  };
+}
 
 #endif
 

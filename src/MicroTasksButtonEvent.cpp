@@ -2,7 +2,9 @@
 //
 //
 
-#include "MicroTasks/ButtonEvent.h"
+#include "MicroTasksButtonEvent.h"
+
+using namespace MicroTasks;
 
 void ButtonEvent::Trigger()
 {
