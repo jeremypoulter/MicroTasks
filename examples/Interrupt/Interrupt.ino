@@ -33,7 +33,7 @@ class Blink : public Task
     unsigned long loop(WakeReason reason);
 };
 
-Blink::Blink(int pin, int delay) : 
+Blink::Blink(int pin, int delay) :
   state(LOW), pin(pin), delay(delay), Task()
 {
 }
@@ -48,7 +48,7 @@ unsigned long Blink::loop(WakeReason reason)
 {
   // Update the LED
   digitalWrite(pin, state);
-  
+
   // Update the state
   state = LOW == state ? HIGH : LOW;
 
@@ -108,11 +108,11 @@ BlinkOnButton blinkOnButton2 = BlinkOnButton(9);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  MicroTask.startTask(&blink1);
-  MicroTask.startTask(&blink2);
-  MicroTask.startTask(&blink3);
-  MicroTask.startTask(&blinkOnButton1);
-  MicroTask.startTask(&blinkOnButton2);
+  MicroTask.startTask(blink1);
+  MicroTask.startTask(blink2);
+  MicroTask.startTask(blink3);
+  MicroTask.startTask(blinkOnButton1);
+  MicroTask.startTask(blinkOnButton2);
 
   buttonEvent.Attach();
 }

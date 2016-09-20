@@ -35,8 +35,8 @@ namespace MicroTasks
       void init();
       void update();
 
-      void startTask(Task *oTask);
-      void stopTask(Task *oTask);
+      void startTask(Task &oTask);
+      void stopTask(Task &oTask);
 
       static uint32_t WaitForEvent;
       static uint32_t WaitForMessage;

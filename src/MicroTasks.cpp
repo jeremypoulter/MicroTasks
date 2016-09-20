@@ -77,15 +77,15 @@ void MicroTasksClass::WakeTask(Task *oTask, WakeReason eReason)
   }
 }
 
-void MicroTasksClass::startTask(Task *oTask)
+void MicroTasksClass::startTask(Task &oTask)
 {
-  oTasks.Add(oTask);
-  oTask->setup();
+  oTasks.Add(&oTask);
+  oTask.setup();
 }
 
-void MicroTasksClass::stopTask(Task *oTask)
+void MicroTasksClass::stopTask(Task &oTask)
 {
-  oTasks.Remove(oTask);
+  oTasks.Remove(&oTask);
 }
 
 MicroTasksClass MicroTask;

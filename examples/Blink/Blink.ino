@@ -26,7 +26,7 @@ class Blink : public Task
     int delay;
 
   public:
-    Blink(int pin, int delay = 1000) 
+    Blink(int pin, int delay = 1000)
     {
       this->state = LOW;
       this->pin = pin;
@@ -80,7 +80,7 @@ unsigned long RandomBlink::loop(WakeReason reason)
 {
   // Update the LED
   digitalWrite(pin, state);
-  
+
   // Update the state
   state = LOW == state ? HIGH : LOW;
 
@@ -96,11 +96,11 @@ RandomBlink randomBlink = RandomBlink(13);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  MicroTask.startTask(&blink1);
-  MicroTask.startTask(&blink2);
-  MicroTask.startTask(&blink3);
-  MicroTask.startTask(&blink4);
-  MicroTask.startTask(&randomBlink);
+  MicroTask.startTask(blink1);
+  MicroTask.startTask(blink2);
+  MicroTask.startTask(blink3);
+  MicroTask.startTask(blink4);
+  MicroTask.startTask(randomBlink);
 }
 
 // the loop function runs over and over again forever
