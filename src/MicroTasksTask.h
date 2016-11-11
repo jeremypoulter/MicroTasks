@@ -14,6 +14,7 @@
 #define WakeReason_Scheduled  0
 #define WakeReason_Event      1
 #define WakeReason_Message    2
+#define WakeReason_Manual     3
 
 namespace MicroTasks
 {

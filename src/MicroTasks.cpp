@@ -40,7 +40,7 @@ void MicroTasksClass::update()
       {
         // Keep a pointer to the next task in case this on is stopped
         oNextEventListener = (EventListener *)(oEventListener->GetNext());
-        WakeTask(oEventListener->GetTask(), WakeReason_Event);
+        wakeTask(oEventListener->GetTask(), WakeReason_Event);
       }
 
       oEvent->triggered = 0;
@@ -54,12 +54,12 @@ void MicroTasksClass::update()
     oNextTask = (Task *)oTask->GetNext();
 
     if (oTask->ulNextLoop <= millis()) {
-      WakeTask(oTask, WakeReason_Scheduled);
+      wakeTask(oTask, WakeReason_Scheduled);
     }
   }
 }
 
-void MicroTasksClass::WakeTask(Task *oTask, WakeReason eReason)
+void MicroTasksClass::wakeTask(Task *oTask, WakeReason eReason)
 {
 //   Serial.print("W ");
 //   Serial.print((unsigned int)oTask);
@@ -77,15 +77,15 @@ void MicroTasksClass::WakeTask(Task *oTask, WakeReason eReason)
   }
 }
 
-void MicroTasksClass::startTask(Task &oTask)
+void MicroTasksClass::startTask(Task *oTask)
 {
-  oTasks.Add(&oTask);
-  oTask.setup();
+  oTasks.Add(oTask);
+  oTask->setup();
 }
 
-void MicroTasksClass::stopTask(Task &oTask)
+void MicroTasksClass::stopTask(Task *oTask)
 {
-  oTasks.Remove(&oTask);
+  oTasks.Remove(oTask);
 }
 
 MicroTasksClass MicroTask;

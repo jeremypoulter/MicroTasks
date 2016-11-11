@@ -27,7 +27,7 @@ namespace MicroTasks
       List oTasks;
 
     protected:
-      void WakeTask(Task *oTask, WakeReason eReason);
+      void wakeTask(Task *oTask, WakeReason eReason);
 
     public:
       MicroTasksClass();
@@ -35,8 +35,22 @@ namespace MicroTasks
       void init();
       void update();
 
-      void startTask(Task &oTask);
-      void stopTask(Task &oTask);
+      void startTask(Task &oTask) {
+        startTask(&oTask);
+      }
+      void startTask(Task *oTask);
+
+      void stopTask(Task &oTask) {
+        stopTask(&oTask);
+      }
+      void stopTask(Task *oTask);
+
+      void wakeTask(Task &oTask) {
+        wakeTask(&oTask);
+      }
+      void wakeTask(Task *oTask) {
+        wakeTask(oTask, WakeReason_Manual);
+      }
 
       static uint32_t WaitForEvent;
       static uint32_t WaitForMessage;
