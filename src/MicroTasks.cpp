@@ -61,19 +61,24 @@ void MicroTasksClass::update()
 
 void MicroTasksClass::wakeTask(Task *oTask, WakeReason eReason)
 {
-//   Serial.print("W ");
+//   Serial.print(millis());
+//   Serial.print(": W ");
 //   Serial.print((unsigned int)oTask);
 //   Serial.print(" [");
 //   Serial.print((int)eReason);
-//   Serial.println("]");
+//   Serial.print("] -> ");
 
   unsigned long ulDelay = oTask->loop(eReason);
 
   oTask->uiFlags = ulDelay & MicroTask.WaitForMask;
   if (MicroTask.Infinate == (ulDelay & ~MicroTask.WaitForMask)) {
     oTask->ulNextLoop = 0xFFFFFFFF;
+//     Serial.println("Forever");
   } else {
-    oTask->ulNextLoop += (ulDelay & ~MicroTask.WaitForMask);
+    oTask->ulNextLoop = millis() + (ulDelay & ~MicroTask.WaitForMask);
+//     Serial.print(ulDelay & ~MicroTask.WaitForMask);
+//     Serial.print(":");
+//     Serial.println(oTask->ulNextLoop);
   }
 }
 
