@@ -40,7 +40,9 @@ void MicroTasksClass::update()
       {
         // Keep a pointer to the next task in case this on is stopped
         oNextEventListener = (EventListener *)(oEventListener->GetNext());
+        oEventListener->triggered = 1;
         wakeTask(oEventListener->GetTask(), WakeReason_Event);
+        oEventListener->triggered = 0;
       }
 
       oEvent->triggered = 0;

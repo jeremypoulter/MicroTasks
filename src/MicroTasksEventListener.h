@@ -16,8 +16,11 @@ namespace MicroTasks
 {
   class EventListener : public Node
   {
+    friend class MicroTasksClass;
+
   private:
     Task *oTask;
+    volatile int triggered;
   public:
     EventListener(Task *oTask) :
       oTask(oTask), Node() {
@@ -25,6 +28,10 @@ namespace MicroTasks
 
     Task *GetTask() {
       return oTask;
+    }
+
+    bool IsTriggered() {
+      return triggered ? true : false;
     }
   };
 }
