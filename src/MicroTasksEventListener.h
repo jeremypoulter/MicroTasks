@@ -20,7 +20,7 @@ namespace MicroTasks
 
   private:
     Task *oTask;
-    volatile int triggered;
+    int triggered;
   public:
     EventListener(Task *oTask) :
       oTask(oTask), Node() {
