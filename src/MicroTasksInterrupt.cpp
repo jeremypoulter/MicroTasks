@@ -29,7 +29,7 @@ bool Interrupt::Attach()
     if (NULL == interrupts[i])
     {
       index = i;
-      pinMode(pin, INPUT);
+      pinMode(pin, inputMode);
       attachInterrupt(digitalPinToInterrupt(pin), Triggers[index], mode);
       interrupts[index] = this;
       return true;

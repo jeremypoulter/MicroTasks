@@ -22,6 +22,7 @@ namespace MicroTasks
     private:
       uint8_t pin;
       int mode;
+      int inputMode;
       int index;
 
       static void TriggerInt0();
@@ -32,8 +33,8 @@ namespace MicroTasks
 
       static InterruptCallback Triggers[];
     public:
-      Interrupt(uint8_t pin, int mode) :
-        Event(), pin(pin), mode(mode)
+      Interrupt(uint8_t pin, int mode, int inputMode = INPUT) :
+        Event(), pin(pin), mode(mode), inputMode(inputMode)
       {
       }
 
