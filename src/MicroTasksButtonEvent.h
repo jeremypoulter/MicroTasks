@@ -23,8 +23,8 @@ namespace MicroTasks
     virtual void Trigger();
 
   public:
-    ButtonEvent(uint8_t interrupt, int mode, int debounce = 20) :
-      debounce(debounce), lastTime(0), Interrupt(interrupt, mode)
+    ButtonEvent(uint8_t pin, int mode, int debounce = 20) :
+      Interrupt(pin, mode), debounce(debounce), lastTime(0)
     {
     }
   };

@@ -25,6 +25,8 @@ namespace MicroTasks
     void Add(Node *oNode);
     void Remove(Node *oNode);
 
+    bool Contains(Node *oNode);
+
     Node *GetFirst() {
       return oFirst;
     }

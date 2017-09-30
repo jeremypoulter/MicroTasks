@@ -11,29 +11,34 @@
 
 #include "MicroTasksEvent.h"
 
+#define MICROTASKS_MAX_INTERUPTS 5
+
 namespace MicroTasks
 {
   typedef void(*InterruptCallback)(void);
 
   class Interrupt : public Event
   {
-  private:
-    uint8_t interrupt;
-    int mode;
+    private:
+      uint8_t pin;
+      int mode;
+      int index;
 
-    static void TriggerInt0();
-    static void TriggerInt1();
+      static void TriggerInt0();
+      static void TriggerInt1();
+      static void TriggerInt2();
+      static void TriggerInt3();
+      static void TriggerInt4();
 
-    static InterruptCallback Triggers[];
-  public:
-    Interrupt(uint8_t interrupt, int mode) :
-      interrupt(interrupt),
-      mode(mode)
-    {
-    }
+      static InterruptCallback Triggers[];
+    public:
+      Interrupt(uint8_t pin, int mode) :
+        Event(), pin(pin), mode(mode)
+      {
+      }
 
-    bool Attach();
-    void Dettach();
+      bool Attach();
+      void Dettach();
   };
 }
 

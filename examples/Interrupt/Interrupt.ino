@@ -60,7 +60,7 @@ Blink blink1 = Blink(10, 125);
 Blink blink2 = Blink(11, 250);
 Blink blink3 = Blink(12, 500);
 
-Interrupt buttonEvent(0, FALLING);
+Interrupt buttonEvent(2, FALLING);
 
 class BlinkOnButton : public Task
 {

@@ -48,3 +48,14 @@ void List::Remove(Node *oNode)
   oNode->oPrev = NULL;
   oNode->oList = NULL;
 }
+
+bool List::Contains(Node *oNode)
+{
+  for(Node *n = oFirst; n; n = n->oNext) {
+    if(oNode == n) {
+      return true;
+    }
+  }
+
+  return false;
+}

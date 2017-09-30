@@ -10,6 +10,9 @@ List Event::oEvents = List();
 
 void Event::Register(EventListener *oListener)
 {
+  if(!oEvents.Contains(this)) {
+    oEvents.Add(this);
+  }
   oClients.Add(oListener);
 }
 
