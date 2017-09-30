@@ -7,7 +7,7 @@
 using namespace MicroTasks;
 
 Task::Task() :
-  ulNextLoop(millis()), uiFlags(0), Node()
+  Node(), ulNextLoop(millis()), uiFlags(0)
 {
 }
 

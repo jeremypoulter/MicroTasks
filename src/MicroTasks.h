@@ -11,6 +11,10 @@
 
 #include "MicroTasksTask.h"
 #include "MicroTasksList.h"
+#include "MicroTasksEvent.h"
+#include "MicroTasksEventListener.h"
+#include "MicroTasksInterrupt.h"
+#include "MicroTasksButtonEvent.h"
 
 /**
  * Gives the number of items in a static array

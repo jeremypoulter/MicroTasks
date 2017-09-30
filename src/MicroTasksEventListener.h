@@ -23,7 +23,7 @@ namespace MicroTasks
     int triggered;
   public:
     EventListener(Task *oTask) :
-      oTask(oTask), Node() {
+      Node(), oTask(oTask) {
     }
 
     Task *GetTask() {
