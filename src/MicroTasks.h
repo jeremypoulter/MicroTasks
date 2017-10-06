@@ -37,7 +37,7 @@ namespace MicroTasks
       MicroTasksClass();
 
       void init();
-      void update();
+      uint32_t update();
 
       void startTask(Task &oTask) {
         startTask(&oTask);
