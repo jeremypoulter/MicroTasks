@@ -34,7 +34,7 @@ namespace MicroTasks
       static InterruptCallback Triggers[];
     public:
       Interrupt(uint8_t pin, int mode, int inputMode = INPUT) :
-        Event(), pin(pin), mode(mode), inputMode(inputMode)
+        Event(), pin(pin), mode(mode), inputMode(inputMode), index(-1)
       {
       }
 
