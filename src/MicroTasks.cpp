@@ -77,7 +77,7 @@ void MicroTasksClass::wakeTask(Task *oTask, WakeReason eReason)
   DBUG((int)eReason);
   DBUG("] -> ");
 
-#ifdef ENABLE_DEBUG
+#ifdef ENABLE_DEBUG_MICROTASKS
   uint32_t ulStart = micros();
 #endif
   uint32_t ulDelay = oTask->loop(eReason);
