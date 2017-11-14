@@ -27,6 +27,10 @@ namespace MicroTasks
       Interrupt(pin, mode, inputMode), debounce(debounce), lastTime(0)
     {
     }
+
+    bool IsPressed() {
+      return LOW == digitalRead(pin);
+    }
   };
 }
 

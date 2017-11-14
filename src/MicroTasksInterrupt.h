@@ -19,8 +19,9 @@ namespace MicroTasks
 
   class Interrupt : public Event
   {
-    private:
+    protected:
       uint8_t pin;
+    private:
       int mode;
       int inputMode;
       int index;
