@@ -35,6 +35,9 @@ namespace MicroTasks
     Node *GetPrev() {
       return oPrev;
     }
+    bool IsValid() {
+      return NULL != oList;
+    }
   };
 }
 

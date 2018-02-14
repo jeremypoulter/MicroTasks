@@ -4,6 +4,7 @@
 
 #include "MicroTasksTask.h"
 #include "MicroTasksEvent.h"
+#include "MicroTasksAlarm.h"
 #include "MicroTasks.h"
 
 #include "debug.h"
@@ -27,16 +28,17 @@ void MicroTasksClass::init()
 
 uint32_t MicroTasksClass::update()
 {
-  Event *oNextEvent;
-  EventListener *oNextEventListener;
-  Task *oNextTask;
+  uint32_t uiNextEvent = 0xFFFFFFFF;
+
   // Any events triggered?
+  Event *oNextEvent;
   for (Event *oEvent = (Event *)Event::oEvents.GetFirst(); oEvent; oEvent = oNextEvent)
   {
     oNextEvent = (Event *)oEvent->GetNext();
     
     if (oEvent->triggered)
     {
+      EventListener *oNextEventListener;
       for (EventListener *oEventListener = (EventListener *)(oEvent->oClients.GetFirst()); oEventListener; oEventListener = oNextEventListener)
       {
         // Keep a pointer to the next task in case this on is stopped
@@ -49,9 +51,29 @@ uint32_t MicroTasksClass::update()
       oEvent->triggered = 0;
     }
   }
+
+  // Any alarms triggered?
+  Alarm *oNextAlarm;
+  for (Alarm *oAlarm = (Alarm *)Alarm::oAlarms.GetFirst(); oAlarm; oAlarm = oNextAlarm)
+  {
+    oNextAlarm = (Alarm *)oAlarm->GetNext();
+    if(millis() >= oAlarm->uiTime) 
+    {
+      oAlarm->Trigger();
+      if(oAlarm->bRepeat) {
+        oAlarm->Reset();
+      } else {
+        oAlarm->Clear();
+      }
+    }
+
+    if(oAlarm->IsValid() && oAlarm->uiTime < uiNextEvent) {
+      uiNextEvent = oAlarm->uiTime;
+    }
+  }
   
   // Any tasks waiting to be woken
-  uint32_t uiNextEvent = 0xFFFFFFFF;
+  Task *oNextTask;
   for (Task *oTask = (Task *)oTasks.GetFirst(); oTask; oTask = oNextTask)
   {
     // Keep a pointer to the next task in case this one is stopped
@@ -59,7 +81,7 @@ uint32_t MicroTasksClass::update()
     if (oTask->ulNextLoop <= millis()) {
       wakeTask(oTask, WakeReason_Scheduled);
     }
-    if(oTask->ulNextLoop < uiNextEvent) {
+    if(oTask->IsValid() && oTask->ulNextLoop < uiNextEvent) {
       uiNextEvent = oTask->ulNextLoop;
     }
   }
