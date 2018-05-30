@@ -86,7 +86,9 @@ uint32_t MicroTasksClass::update()
     }
   }
 
+#ifdef ENABLE_DEBUG_MICROTASKS
   DEBUG_PORT.flush();
+#endif
   return uiNextEvent;
 }
 
