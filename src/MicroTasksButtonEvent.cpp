@@ -33,8 +33,6 @@ void ButtonEvent::Trigger()
 void ButtonEvent::ButtonTriggerDebounce::Trigger()
 {
   bool newState = LOW == digitalRead(event.pin);
-  DBUGVAR(newState);
-  DBUGVAR(event.state);
   if(newState != event.state) 
   {
     event.state = newState;
