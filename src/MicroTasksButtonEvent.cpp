@@ -4,6 +4,8 @@
 
 #include "MicroTasksButtonEvent.h"
 
+#include "debug.h"
+
 using namespace MicroTasks;
 
 ButtonEvent::ButtonEvent(uint8_t pin, int mode, int inputMode, int debounce) :
@@ -21,9 +23,7 @@ void ButtonEvent::Trigger()
   {
     state = LOW == digitalRead(pin);
     triggerInterrupt();
-  }
-  else 
-  {
+  } else {
     debounceAlarm.Set(debounce, false);
   }
 
@@ -33,6 +33,8 @@ void ButtonEvent::Trigger()
 void ButtonEvent::ButtonTriggerDebounce::Trigger()
 {
   bool newState = LOW == digitalRead(event.pin);
+  DBUGVAR(newState);
+  DBUGVAR(event.state);
   if(newState != event.state) 
   {
     event.state = newState;
@@ -44,7 +46,7 @@ void ButtonEvent::ButtonTriggerDebounce::Trigger()
 void ButtonEvent::triggerInterrupt()
 {
   if((true == state && (RISING == mode || CHANGE == mode)) ||
-      (false == state && (FALLING == mode || CHANGE == mode)))
+     (false == state && (FALLING == mode || CHANGE == mode)))
   {
     Interrupt::Trigger();
   }
