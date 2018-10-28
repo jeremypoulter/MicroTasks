@@ -8,12 +8,12 @@
 
 using namespace MicroTasks;
 
-ButtonEvent::ButtonEvent(uint8_t pin, int mode, int inputMode, int debounce) :
-  Interrupt(pin, CHANGE, inputMode), debounce(debounce), lastTime(0), state(false), mode(mode),
+ButtonEvent::ButtonEvent(uint8_t pin, int mode, int inputMode, int debounce, int pressed) :
+  Interrupt(pin, CHANGE, inputMode), debounce(debounce), pressed(pressed), lastTime(0), state(false), mode(mode),
   debounceAlarm(*this)
 {
   pinMode(pin, inputMode);
-  state = LOW == digitalRead(pin);
+  state = pressed == digitalRead(pin);
 }
 
 void ButtonEvent::Trigger()
@@ -21,7 +21,7 @@ void ButtonEvent::Trigger()
   unsigned long timeNow = millis();
   if (timeNow >= lastTime + debounce)
   {
-    state = LOW == digitalRead(pin);
+    state = pressed == digitalRead(pin);
     triggerInterrupt();
   } else {
     debounceAlarm.Set(debounce, false);
@@ -32,7 +32,7 @@ void ButtonEvent::Trigger()
 
 void ButtonEvent::ButtonTriggerDebounce::Trigger()
 {
-  bool newState = LOW == digitalRead(event.pin);
+  bool newState = event.pressed == digitalRead(event.pin);
   if(newState != event.state) 
   {
     event.state = newState;

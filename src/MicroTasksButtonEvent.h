@@ -20,7 +20,8 @@ namespace MicroTasks
     int debounce;
     unsigned long lastTime;
     bool state;
-    int mode; 
+    int mode;
+    int pressed;
     class ButtonTriggerDebounce : public Alarm
     {
     private:
@@ -36,7 +37,7 @@ namespace MicroTasks
     virtual void Trigger();
 
   public:
-    ButtonEvent(uint8_t pin, int mode, int inputMode = INPUT, int debounce = 20);
+    ButtonEvent(uint8_t pin, int mode, int inputMode = INPUT, int debounce = 20, int pressed = LOW);
 
     bool IsPressed() {
       return state;
