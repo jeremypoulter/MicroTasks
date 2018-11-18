@@ -7,7 +7,7 @@
 #include "MicroTasksAlarm.h"
 #include "MicroTasks.h"
 
-#include "debug.h"
+#include "MicroDebug.h"
 
 using namespace MicroTasks;
 

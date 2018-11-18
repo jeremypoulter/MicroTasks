@@ -4,12 +4,12 @@
 
 #include "MicroTasksButtonEvent.h"
 
-#include "debug.h"
+#include "MicroDebug.h"
 
 using namespace MicroTasks;
 
 ButtonEvent::ButtonEvent(uint8_t pin, int mode, int inputMode, int debounce, int pressed) :
-  Interrupt(pin, CHANGE, inputMode), debounce(debounce), pressed(pressed), lastTime(0), state(false), mode(mode),
+  Interrupt(pin, CHANGE, inputMode), debounce(debounce), lastTime(0), state(false), mode(mode), pressed(pressed), 
   debounceAlarm(*this)
 {
   pinMode(pin, inputMode);
