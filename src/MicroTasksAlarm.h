@@ -31,11 +31,10 @@ namespace MicroTasks
     virtual void Trigger() = 0;
 
   public:
-    Alarm() : oClients(), uiDelay(0), bRepeat(false), uiTime(0) {
-      oAlarms.Add(this);
+    Alarm() : Node(), oClients(), uiDelay(0), bRepeat(false), uiTime(0) {
     }
     ~Alarm() {
-      oAlarms.Remove(this);
+      Clear();
     }
 
     void Set(uint32_t uiDelay, bool bRepeat);
