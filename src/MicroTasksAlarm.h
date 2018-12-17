@@ -19,7 +19,6 @@ namespace MicroTasks
     friend class MicroTasksClass;
 
   private:
-    List oClients;
     static List oAlarms;
 
     uint32_t uiDelay;
@@ -31,7 +30,7 @@ namespace MicroTasks
     virtual void Trigger() = 0;
 
   public:
-    Alarm() : Node(), oClients(), uiDelay(0), bRepeat(false), uiTime(0) {
+    Alarm() : Node(), uiDelay(0), bRepeat(false), uiTime(0) {
     }
     ~Alarm() {
       Clear();
