@@ -26,9 +26,7 @@ namespace MicroTasks
     volatile int triggered;
 
   protected:
-    virtual void Trigger() {
-      triggered = 1;
-    }
+    virtual void Trigger(bool fromInterrupt = false);
 
   public:
     Event() : oClients(), triggered(0) {

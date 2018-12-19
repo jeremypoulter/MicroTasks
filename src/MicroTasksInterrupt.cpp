@@ -48,7 +48,7 @@ void Interrupt::Dettach()
 #define INTERRUPT_CALLBACK(intNum)  \
 void Interrupt::TriggerInt ## intNum () \
 { \
-  interrupts[intNum]->Trigger(); \
+  interrupts[intNum]->Trigger(true); \
 }
 
 INTERRUPT_CALLBACK(0);
