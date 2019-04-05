@@ -33,6 +33,12 @@ namespace MicroTasks
       static void TriggerInt4();
 
       static InterruptCallback Triggers[];
+
+    protected:
+      virtual void Trigger() {
+        Event::Trigger(true);
+      }
+
     public:
       Interrupt(uint8_t pin, int mode, int inputMode = INPUT) :
         Event(), pin(pin), mode(mode), inputMode(inputMode), index(-1)

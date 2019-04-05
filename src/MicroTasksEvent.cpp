@@ -2,6 +2,7 @@
 //
 //
 
+#include "MicroTasks.h"
 #include "MicroTasksEvent.h"
 
 using namespace MicroTasks;
@@ -19,4 +20,9 @@ void Event::Register(EventListener *oListener)
 void Event::Deregister(EventListener *oListener)
 {
   oClients.Remove(oListener);
+}
+
+void Event::Trigger(bool fromInterrupt) {
+  triggered = 1;
+  MicroTask.wakeLoop(fromInterrupt);
 }

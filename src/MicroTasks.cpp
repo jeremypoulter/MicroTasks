@@ -7,7 +7,12 @@
 #include "MicroTasksAlarm.h"
 #include "MicroTasks.h"
 
-#include "debug.h"
+#ifdef ENABLE_DEBUG_MICROTASKS
+#define ENABLE_DEBUG
+#else 
+#undef ENABLE_DEBUG
+#endif
+#include "MicroDebug.h"
 
 using namespace MicroTasks;
 
@@ -18,7 +23,9 @@ uint32_t MicroTasksClass::WaitForMask = MicroTasksClass::WaitForEvent | WaitForM
 
 uint32_t MicroTasksClass::Infinate = ~MicroTasksClass::WaitForMask;
 
-MicroTasksClass::MicroTasksClass()
+MicroTasksClass::MicroTasksClass() :
+  oTasks(),
+  fnLoopWakeCallback(NULL)
 {
 }
 
@@ -59,12 +66,13 @@ uint32_t MicroTasksClass::update()
     oNextAlarm = (Alarm *)oAlarm->GetNext();
     if(millis() >= oAlarm->uiTime) 
     {
-      oAlarm->Trigger();
       if(oAlarm->bRepeat) {
         oAlarm->Reset();
       } else {
         oAlarm->Clear();
       }
+
+      oAlarm->Trigger();
     }
 
     if(oAlarm->IsValid() && oAlarm->uiTime < uiNextEvent) {
@@ -86,7 +94,9 @@ uint32_t MicroTasksClass::update()
     }
   }
 
+#ifdef ENABLE_DEBUG_MICROTASKS
   DEBUG_PORT.flush();
+#endif
   return uiNextEvent;
 }
 

@@ -25,10 +25,13 @@
 
 namespace MicroTasks
 {
+  typedef void (* WakeCallback)(bool interrupt);
+
   class MicroTasksClass
   {
     private:
       List oTasks;
+      WakeCallback fnLoopWakeCallback;
 
     protected:
       void wakeTask(Task *oTask, WakeReason eReason);
@@ -54,6 +57,16 @@ namespace MicroTasks
       }
       void wakeTask(Task *oTask) {
         wakeTask(oTask, WakeReason_Manual);
+      }
+
+      void setLoopWakeCallback(WakeCallback _callback) {
+        fnLoopWakeCallback = _callback;
+      }
+
+      void wakeLoop(bool interrupt) {
+        if(fnLoopWakeCallback) {
+          fnLoopWakeCallback(interrupt);
+        }
       }
 
       static uint32_t WaitForEvent;

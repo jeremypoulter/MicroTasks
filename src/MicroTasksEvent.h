@@ -26,8 +26,9 @@ namespace MicroTasks
     volatile int triggered;
 
   protected:
+    void Trigger(bool fromInterrupt);
     virtual void Trigger() {
-      triggered = 1;
+      Trigger(false);
     }
 
   public:

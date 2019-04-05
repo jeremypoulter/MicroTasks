@@ -34,7 +34,7 @@ class Blink : public Task
 };
 
 Blink::Blink(int pin, int delay) :
-  state(LOW), pin(pin), delay(delay), Task()
+  Task(), state(LOW), pin(pin), delay(delay)
 {
 }
 

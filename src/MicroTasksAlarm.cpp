@@ -18,14 +18,18 @@ void Alarm::Set(uint32_t uiDelay, bool bRepeat)
 
 void Alarm::Reset()
 {
+  noInterrupts();
   if(!oAlarms.Contains(this)) {
     oAlarms.Add(this);
   }
+  interrupts();
 
   uiTime = millis() + uiDelay;
 }
 
 void Alarm::Clear()
 {
+  noInterrupts();
   oAlarms.Remove(this);
+  interrupts();
 }
