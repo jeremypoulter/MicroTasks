@@ -29,6 +29,7 @@ cache:
 env:
    - PLATFORMIO_CI_SRC=examples/Blink/Blink.ino
    - PLATFORMIO_CI_SRC=examples/Interrupt/Interrupt.ino
+   - PLATFORMIO_CI_SRC=examples/Alarm/Alarm.ino
 install:
    - pip install -U platformio
 script:
