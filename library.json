@@ -20,7 +20,7 @@
   [
     {
       "name": "MicroDebug",
-      "version": "https://github.com/jeremypoulter/MicroDebug.git"
+      "version": "https://github.com/jeremypoulter/MicroDebug.git#0.0.1"
     }
   ]
 }
