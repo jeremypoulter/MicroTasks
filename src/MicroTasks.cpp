@@ -126,7 +126,6 @@ void MicroTasksClass::wakeTask(Task *oTask, WakeReason eReason)
     DBUG(ulNext);
     DBUG(":");
     DBUGLN(oTask->ulNextLoop);
-    wakeLoop(false);
   }
 }
 
