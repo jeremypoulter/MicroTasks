@@ -21,16 +21,20 @@
 
 language: python
 python:
-   - "2.7"
+  - "2.7"
 sudo: false
 cache:
-   directories:
-       - "~/.platformio"
+  directories:
+    - "~/.platformio"
 env:
-   - PLATFORMIO_CI_SRC=examples/Blink/Blink.ino
-   - PLATFORMIO_CI_SRC=examples/Interrupt/Interrupt.ino
-   - PLATFORMIO_CI_SRC=examples/Alarm/Alarm.ino
+  - PLATFORMIO_CI_SRC=examples/Blink/Blink.ino
+  - PLATFORMIO_CI_SRC=examples/Interrupt/Interrupt.ino
+  - PLATFORMIO_CI_SRC=examples/Alarm/Alarm.ino
+
 install:
-   - pip install -U platformio
+  - pip install -U platformio
+  - platformio update
+  - pio lib -g install $TRAVIS_BUILD_DIR
+
 script:
-   - platformio ci --lib="." --board=uno --board=esp01 --board=esp12e --board=huzzah
+  - platformio ci --board=uno --board=esp01 --board=esp12e --board=huzzah
