@@ -1,6 +1,6 @@
 {
   "name":"MicroTasks",
-  "version":"0.0.1",
+  "version":"0.0.2",
   "description":"Provide a basic co-operative task management allowing some simple level of multi tasking.",
   "keywords":"task,thread,multitask",
   "framework":"arduino",
