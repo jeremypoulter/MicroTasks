@@ -7,9 +7,7 @@
 #include "MicroTasksAlarm.h"
 #include "MicroTasks.h"
 
-#ifdef ENABLE_DEBUG_MICROTASKS
-#define ENABLE_DEBUG
-#else 
+#if defined(ENABLE_DEBUG) && !defined(ENABLE_DEBUG_MICROTASKS)
 #undef ENABLE_DEBUG
 #endif
 #include "MicroDebug.h"
@@ -104,7 +102,7 @@ void MicroTasksClass::wakeTask(Task *oTask, WakeReason eReason)
 {
   DBUG(millis());
   DBUG(": W ");
-  DBUG((unsigned int)oTask);
+  DBUG((uint32_t)oTask, HEX);
   DBUG(" [");
   DBUG((int)eReason);
   DBUG("] -> ");
@@ -132,14 +130,20 @@ void MicroTasksClass::wakeTask(Task *oTask, WakeReason eReason)
 
 void MicroTasksClass::startTask(Task *oTask)
 {
-  oTasks.Add(oTask);
-  oTask->setup();
+  if(!oTask->IsValid())
+  {
+    oTasks.Add(oTask);
+    oTask->setup();
+  }
 }
 
 void MicroTasksClass::stopTask(Task *oTask)
 {
-  oTasks.Remove(oTask);
-  oTask->ulNextLoop = 0xFFFFFFFF;
+  if(oTask->IsValid())
+  {
+    oTasks.Remove(oTask);
+    oTask->ulNextLoop = 0xFFFFFFFF;
+  }
 }
 
 MicroTasksClass MicroTask;
