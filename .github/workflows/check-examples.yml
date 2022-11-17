@@ -44,8 +44,11 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
-      - name: Build example
-        run: pio ci --lib="." --board="${{ matrix.board }}"
-        env:
-          PLATFORMIO_CI_SRC: examples/${{ matrix.example }}/src
+      - name: Install Checked out MicroTasks
+        run:
+          pio lib -g install $GITHUB_WORKSPACE
 
+      - name: Build example 
+        run: |
+          cd examples/${{ matrix.example }}
+          pio run -e ${{ matrix.board }}
