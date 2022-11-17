@@ -77,7 +77,7 @@ class BlinkOnButton : public Task
 };
 
 BlinkOnButton::BlinkOnButton(int pin) :
-  state(LOW), pin(pin), buttonEventListener(this), Task()
+   Task(), state(LOW), pin(pin), buttonEventListener(this)
 {
 }
 

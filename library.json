@@ -1,6 +1,6 @@
 {
   "name":"MicroTasks",
-  "version":"0.0.2",
+  "version":"0.0.3",
   "description":"Provide a basic co-operative task management allowing some simple level of multi tasking.",
   "keywords":"task,thread,multitask",
   "framework":"arduino",
@@ -19,8 +19,9 @@
   "dependencies":
   [
     {
+      "owner": "jeremypoulter",
       "name": "Micro Debug",
-      "version": "0.0.2"
+      "version": "^0.0.3"
     }
   ]
 }

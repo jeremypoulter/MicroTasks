@@ -1,0 +1,50 @@
+name: Platform IO
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        example:
+          - Alarm
+          - Blink
+          - Interupt
+        board:
+          - huzzah
+          - esp-wrover-kit
+          - uno
+          - nrf52_dk
+
+    runs-on: ubuntu-latest
+    name: Build ${{ matrix.example }}-${{ matrix.board }}
+
+    steps:
+      - uses: ammaraskar/gcc-problem-matcher@master
+
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+
+      - name: Install Platform IO
+        run:
+          |
+          pip install -U platformio
+          platformio update
+
+      - name: Install Checked out ConfigJSON
+        run:
+          pio lib -g install $GITHUB_WORKSPACE
+
+      - name: Build example 
+        run:
+          |
+          cd examples/${{ matrix.example }}
+          pio run -e ${{ matrix.board }}
