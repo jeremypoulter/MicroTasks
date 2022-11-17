@@ -15,7 +15,7 @@ jobs:
         example:
           - Alarm
           - Blink
-          - Interupt
+          - Interrupt
         board:
           - huzzah
           - esp-wrover-kit
