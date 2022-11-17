@@ -30,21 +30,22 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v1
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
 
-      - name: Install Platform IO
-        run:
-          |
-          pip install -U platformio
-          platformio update
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
-      - name: Install Checked out ConfigJSON
-        run:
-          pio lib -g install $GITHUB_WORKSPACE
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
 
-      - name: Build example 
-        run:
-          |
-          cd examples/${{ matrix.example }}
-          pio run -e ${{ matrix.board }}
+      - name: Build example
+        run: pio ci --lib="." --board="${{ matrix.board }}"
+        env:
+          PLATFORMIO_CI_SRC: examples/${{ matrix.example }}/src
+
