@@ -10,6 +10,8 @@
 #endif
 
 #include "MicroTasksNode.h"
+#include "MicroTasksList.h"
+#include "MicroTasksMessage.h"
 
 #define WakeReason_Scheduled  0
 #define WakeReason_Event      1
@@ -38,8 +40,12 @@ namespace MicroTasks
   private:
     unsigned long ulNextLoop;
     unsigned long uiFlags;
+    List oMessages;
+
+    static uint32_t Wake;
 
   protected:
+    bool receive(Message *&msg);
 
   public:
     Task();
@@ -47,6 +53,8 @@ namespace MicroTasks
 
     virtual void setup() = 0;
     virtual unsigned long loop(WakeReason reason) = 0;
+
+    void send(Message *msg);
   };
 }
 

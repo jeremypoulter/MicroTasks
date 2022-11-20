@@ -16,6 +16,7 @@ jobs:
           - Alarm
           - Blink
           - Interrupt
+          - Message
         board:
           - huzzah
           - esp-wrover-kit

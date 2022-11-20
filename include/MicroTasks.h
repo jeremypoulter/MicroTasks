@@ -56,7 +56,7 @@ namespace MicroTasks
         wakeTask(&oTask);
       }
       void wakeTask(Task *oTask) {
-        wakeTask(oTask, WakeReason_Manual);
+        oTask->uiFlags |= Task::Wake;
       }
 
       void setLoopWakeCallback(WakeCallback _callback) {

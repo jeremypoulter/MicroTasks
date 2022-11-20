@@ -84,7 +84,14 @@ uint32_t MicroTasksClass::update()
   {
     // Keep a pointer to the next task in case this one is stopped
     oNextTask = (Task *)oTask->GetNext();
-    if (oTask->ulNextLoop <= millis()) {
+    if(oTask->IsValid() && oTask->uiFlags & Task::Wake) {
+      wakeTask(oTask, WakeReason_Manual);
+      oTask->uiFlags &= ~Task::Wake;
+    }
+    if(oTask->IsValid() && oTask->oMessages.GetFirst()) {
+      wakeTask(oTask, WakeReason_Message);
+    }
+    if(oTask->IsValid() && oTask->ulNextLoop <= millis()) {
       wakeTask(oTask, WakeReason_Scheduled);
     }
     if(oTask->IsValid() && oTask->ulNextLoop < uiNextEvent) {
@@ -115,7 +122,9 @@ void MicroTasksClass::wakeTask(Task *oTask, WakeReason eReason)
   DBUG(":");
   uint32_t ulNext = ulDelay & ~MicroTask.WaitForMask;
 
-  oTask->uiFlags = ulDelay & MicroTask.WaitForMask;
+  oTask->uiFlags &= ~MicroTask.WaitForMask;
+  oTask->uiFlags |= (ulDelay & MicroTask.WaitForMask);
+
   if (MicroTask.Infinate == ulNext) {
     oTask->ulNextLoop = 0xFFFFFFFF;
     DBUGLN("Forever");
