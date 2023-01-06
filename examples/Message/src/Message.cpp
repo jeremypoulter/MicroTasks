@@ -15,26 +15,46 @@
 
 using namespace MicroTasks;
 
-class HelloMessage : public MessageBase<1>
+class HelloMessage : public Message
 {
   protected:
     virtual void receive() {
       Serial.println("Received Hello");
       digitalWrite(LED_BUILTIN, LOW);
     }
+
+  public: 
+    static const uint32_t ID = 0;
+    HelloMessage() : Message(ID) {}
 };
 
 
-class WorldMessage : public MessageBase<2>
+class WorldMessage : public Message
 {
+  private:
+    uint32_t _state;
+
   protected:
     virtual void receive() {
       Serial.println("Received World");
       digitalWrite(LED_BUILTIN, HIGH);
     }
+
+  public: 
+    static const uint32_t ID = 1;
+    WorldMessage(uint32_t state) :
+      _state(state), Message(ID) {}
+
+    uint32_t getState() {
+      return _state;
+    }
 };
 
-class OtherMessage : public MessageBase<3> {};
+class OtherMessage : public Message {
+  public: 
+    static const uint32_t ID = 2;
+    OtherMessage() : Message(ID) {}
+};
 
 class ReceiveMessageTask : public Task
 {
@@ -73,6 +93,12 @@ unsigned long ReceiveMessageTask::loop(WakeReason reason)
         WorldMessage::ID == msg->id() ? "WorldMessage" :
         "UNKNOWN"
       );
+      if (WorldMessage::ID == msg->id())
+      {
+        WorldMessage *world = static_cast<WorldMessage *>(msg);
+        Serial.printf("state = %u\n", world->getState());
+      }
+      
       delete msg;
     }
   }
@@ -112,8 +138,8 @@ unsigned long SendMessageTask::loop(WakeReason reason)
                  "UNKNOWN");
 
   Message *msg = (state++ % 2 )? 
-      (Message *)(new HelloMessage()) :
-      (Message *)(new WorldMessage());
+      static_cast<Message *>(new HelloMessage()) :
+      static_cast<Message *>(new WorldMessage(state));
 
   receiver.send(msg);
 

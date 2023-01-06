@@ -14,26 +14,24 @@
 
 namespace MicroTasks
 {
-  template <uint32_t TYPE = 0>
-  class MessageBase : public Node
+  class Message : public Node
   {
     friend class Task;
+
+    uint32_t _id;
 
   protected:
     virtual void receive() {
     }
 
   public:
-    MessageBase() : Node() {
-    }
-    ~MessageBase() {
-    }
+    Message(uint32_t id) : 
+      _id(id), Node() { }
 
-    static const uint32_t ID = TYPE;
-    virtual uint32_t id() { return ID; }
+    uint32_t id() {
+      return _id;
+    }
   };
-  
-  typedef class MessageBase<> Message;
 }
 
 
