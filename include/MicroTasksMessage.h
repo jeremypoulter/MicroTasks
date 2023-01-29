@@ -26,7 +26,7 @@ namespace MicroTasks
 
   public:
     Message(uint32_t id) : 
-      _id(id), Node() { }
+      Node(), _id(id) { }
 
     uint32_t id() {
       return _id;

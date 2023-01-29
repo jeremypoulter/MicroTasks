@@ -10,6 +10,10 @@
 
  */
 
+#ifdef NRF52
+#include "Adafruit_TinyUSB.h"s
+#endif
+
 #include "MicroTasks.h"
 #include "MicroTasksMessage.h"
 
@@ -43,7 +47,7 @@ class WorldMessage : public Message
   public: 
     static const uint32_t ID = 1;
     WorldMessage(uint32_t state) :
-      _state(state), Message(ID) {}
+      Message(ID), _state(state) {}
 
     uint32_t getState() {
       return _state;
@@ -96,7 +100,8 @@ unsigned long ReceiveMessageTask::loop(WakeReason reason)
       if (WorldMessage::ID == msg->id())
       {
         WorldMessage *world = static_cast<WorldMessage *>(msg);
-        Serial.printf("state = %u\n", world->getState());
+        Serial.print("state = ");
+        Serial.println(world->getState());
       }
       
       delete msg;
