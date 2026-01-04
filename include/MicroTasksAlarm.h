@@ -19,7 +19,10 @@ namespace MicroTasks
     friend class MicroTasksClass;
 
   private:
-    static List oAlarms;
+    static List& GetAlarms() {
+      static List oAlarms;
+      return oAlarms;
+    }
 
     uint32_t uiDelay;
     bool bRepeat;

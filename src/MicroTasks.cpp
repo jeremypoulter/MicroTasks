@@ -37,7 +37,7 @@ uint32_t MicroTasksClass::update()
 
   // Any events triggered?
   Event *oNextEvent;
-  for (Event *oEvent = (Event *)Event::oEvents.GetFirst(); oEvent; oEvent = oNextEvent)
+  for (Event *oEvent = (Event *)Event::GetEvents().GetFirst(); oEvent; oEvent = oNextEvent)
   {
     oNextEvent = (Event *)oEvent->GetNext();
     
@@ -59,7 +59,7 @@ uint32_t MicroTasksClass::update()
 
   // Any alarms triggered?
   Alarm *oNextAlarm;
-  for (Alarm *oAlarm = (Alarm *)Alarm::oAlarms.GetFirst(); oAlarm; oAlarm = oNextAlarm)
+  for (Alarm *oAlarm = (Alarm *)Alarm::GetAlarms().GetFirst(); oAlarm; oAlarm = oNextAlarm)
   {
     oNextAlarm = (Alarm *)oAlarm->GetNext();
     if(millis() >= oAlarm->uiTime) 
