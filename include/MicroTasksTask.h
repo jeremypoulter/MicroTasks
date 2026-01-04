@@ -42,7 +42,7 @@ namespace MicroTasks
     unsigned long uiFlags;
     List oMessages;
 
-    static const uint32_t Wake = (1 << 0);
+    static constexpr uint32_t Wake = (1u << 0);
     
   protected:
     bool receive(Message *&msg);
