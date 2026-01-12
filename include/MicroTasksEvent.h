@@ -21,7 +21,10 @@ namespace MicroTasks
 
   private:
     List oClients;
-    static List oEvents;
+    static List& GetEvents() {
+      static List oEvents;
+      return oEvents;
+    }
 
     volatile int triggered;
 
@@ -33,10 +36,10 @@ namespace MicroTasks
 
   public:
     Event() : oClients(), triggered(0) {
-      oEvents.Add(this);
+      GetEvents().Add(this);
     }
     ~Event() {
-      oEvents.Remove(this);
+      GetEvents().Remove(this);
     }
 
     void Register(EventListener *oListener);

@@ -6,8 +6,6 @@
 
 using namespace MicroTasks;
 
-uint32_t Task::Wake = (1 << 0);
-
 Task::Task() :
   Node(), ulNextLoop(millis()), uiFlags(0), oMessages()
 {

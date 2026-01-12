@@ -6,8 +6,6 @@
 
 using namespace MicroTasks;
 
-List Alarm::oAlarms = List();
-
 void Alarm::Set(uint32_t uiDelay, bool bRepeat)
 {
   this->uiDelay = uiDelay;
@@ -19,8 +17,8 @@ void Alarm::Set(uint32_t uiDelay, bool bRepeat)
 void Alarm::Reset()
 {
   noInterrupts();
-  if(!oAlarms.Contains(this)) {
-    oAlarms.Add(this);
+  if(!GetAlarms().Contains(this)) {
+    GetAlarms().Add(this);
   }
   interrupts();
 
@@ -30,6 +28,6 @@ void Alarm::Reset()
 void Alarm::Clear()
 {
   noInterrupts();
-  oAlarms.Remove(this);
+  GetAlarms().Remove(this);
   interrupts();
 }
